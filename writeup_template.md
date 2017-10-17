@@ -69,8 +69,8 @@ My final model consisted of the following layers:
 
 | Layer         		|     Description	        					| Input |Output| 
 |:---------------------:|:---------------------------------------------:| :----:|:-----:|
-| Inpur preprocessing   | 32x32x3 RGB image 	                           |**32x32x3**|32x32x1|
-| Convolution 5x5     	 | 1x1 stride, valid padding, RELU            	  |**32x32x1**|28x28x48|
+| Input preprocessing   | 32x32x3 RGB image 	                           |**32x32x3**|32x32x1|
+| Convolution 5x5     	 | 1x1 stride, valid padding, RELU            	  |32x32x1|28x28x48|
 | Max pooling			        | 2x2 stride, 2x2 kernel						                  |28x28x48|14x14x48|
 | Convolution 5x5 	     | 1x1 stride, valid padding, RELU            	  |14x14x48|10x10x96|
 | Max pooling			        | 2x2 stride, 2x2 kernel	   					               |10x10x96|5x5x96|
@@ -84,14 +84,20 @@ My final model consisted of the following layers:
 
 ####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
 
-To train the model, I used an ....
+To train the model, I used an my local machine CPU.
+Training Parameters:
+Batch size : 128
+Epoch      : 15
+Optimizer  : Adamoptimizer
+Learning_rate: 0.001
+Sigma_layers: 0.1
 
 ####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
 
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 95.5
+* validation set accuracy of 93.1 
+* test set accuracy of 92.8
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -112,8 +118,8 @@ If a well known architecture was chosen:
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text](img/1.png) ![alt text](img/2.png) ![alt text](img/4.png) 
+![alt text](img/8.png) ![alt text](img/9.png)
 
 The first image might be difficult to classify because ...
 
