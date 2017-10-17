@@ -70,15 +70,15 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| Input |Output| 
 |:---------------------:|:---------------------------------------------:| :----:|:-----:|
 | Inpur preprocessing   | 32x32x3 RGB image 	                           |**32x32x3**|32x32x1|
-| Convolution 5x5     	 | 1x1 stride, valid padding, RELU activation 	  |**32x32x1**|28x28x48|
-| Max pooling			        | 2x2 stride, 2x2 window						                  |28x28x48|14x14x48|
-| Convolution 5x5 	     | 1x1 stride, valid padding, RELU activation 	  |14x14x48|10x10x96|
-| Max pooling			        | 2x2 stride, 2x2 window	   					               |10x10x96|5x5x96|
-| Convolution 3x3 		    | 1x1 stride, valid padding, RELU activation    |5x5x96|3x3x172|
-| Max pooling			        | 1x1 stride, 2x2 window        				            |3x3x172|2x2x172|
-| Flatten				           | 3 dimensions -> 1 dimension					              |2x2x172| 688|
-| Fully Connected       | connect every neuron from layer above			      |688|84|
-| Fully Connected       | output = number of traffic signs in data set	 |84|**43**|
+| Convolution 5x5     	 | 1x1 stride, valid padding, RELU            	  |**32x32x1**|28x28x48|
+| Max pooling			        | 2x2 stride, 2x2 kernel						                  |28x28x48|14x14x48|
+| Convolution 5x5 	     | 1x1 stride, valid padding, RELU            	  |14x14x48|10x10x96|
+| Max pooling			        | 2x2 stride, 2x2 kernel	   					               |10x10x96|5x5x96|
+| Convolution 3x3 		    | 1x1 stride, valid padding, RELU               |5x5x96|3x3x172|
+| Max pooling			        | 1x1 stride, 2x2 kernel        				            |3x3x172|2x2x172|
+| Flatten				           | flatten the matrix to 1D   					              |2x2x172| 688|
+| FC                    | Fully connected layer                			      |688|84|
+| FC                    | output = traffic sign labels in data        	 |84|**43**|
 
 
 
