@@ -41,10 +41,10 @@ I used numpy, matplotlib and pandas to explore the dataset.
 
 ####2. Here is an exploratory visualization of the data set. 
 The training images in the dataset can be seen as below
-![alt text][img/data_test_images.png]
+![alt text](img/data_test_images.png)
 
 The label distribution in training images can be visualized by the bargraph below
-![alt text][img/bargraph.png]
+![alt text](img/bargraph.png)
 
 
 ###Design and Test a Model Architecture
