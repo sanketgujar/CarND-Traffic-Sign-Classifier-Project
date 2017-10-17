@@ -117,9 +117,8 @@ If a well known architecture was chosen:
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Here are five German traffic signs that I found on the web:
-
-![alt text](img/1.png) ![alt text](img/2.png) ![alt text](img/4.png) 
-![alt text](img/8.png) ![alt text](img/9.png)
+![alt text](img/1.jpg) ![alt text](img/2.jpg) ![alt text](img/4.jpg) 
+![alt text](img/8.jpg) ![alt text](img/9.jpg)
 
 The first image might be difficult to classify because ...
 
