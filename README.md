@@ -12,7 +12,7 @@ I used numpy, matplotlib and pandas to explore the dataset.
 * The shape of a traffic sign image is (32, 32, 3)
 * The number of unique classes/labels in the data set is 43
 
-####2. Here is an exploratory visualization of the data set.
+**2. Here is an exploratory visualization of the data set.**
 The training images in the dataset can be seen as below
 ![alt text](img/data_test_images.png)
 
@@ -67,7 +67,6 @@ My final model results were:
 * test set accuracy of 92.8
 
 **Testing Model on New Images**
-
 Here are five German traffic signs that I found on the web:
 ![alt text](img/new_one.png)
 
