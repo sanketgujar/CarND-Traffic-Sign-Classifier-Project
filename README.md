@@ -1,58 +1,96 @@
-## Project: Build a Traffic Sign Recognition Program
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+**Traffic Sign Recognition** 
+**Traffic Sign Recognition Project**
 
-Overview
----
-In this project, you will use what you've learned about deep neural networks and convolutional neural networks to classify traffic signs. You will train and validate a model so it can classify traffic sign images using the [German Traffic Sign Dataset](http://benchmark.ini.rub.de/?section=gtsrb&subsection=dataset). After the model is trained, you will then try out your model on images of German traffic signs that you find on the web.
 
-We have included an Ipython notebook that contains further instructions 
-and starter code. Be sure to download the [Ipython notebook](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb). 
+Here is a link to my [project code](https://github.com/sanketgujar/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-We also want you to create a detailed writeup of the project. Check out the [writeup template](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup. The writeup can be either a markdown file or a pdf document.
+**Data Set Summary & Exploration**
+I used numpy, matplotlib and pandas to explore the dataset.
+* The size of training set is 34799
+* The size of the validation set is 4410
+* The size of test set is 12630
+* The shape of a traffic sign image is (32, 32, 3)
+* The number of unique classes/labels in the data set is 43
 
-To meet specifications, the project will require submitting three files: 
-* the Ipython notebook with the code
-* the code exported as an html file
-* a writeup report either as a markdown or pdf file 
+####2. Here is an exploratory visualization of the data set.
+The training images in the dataset can be seen as below
+![alt text](img/data_test_images.png)
 
-Creating a Great Writeup
----
-A great writeup should include the [rubric points](https://review.udacity.com/#!/rubrics/481/view) as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
+The label distribution in training images can be visualized by the bargraph below
+![alt text](img/bargraph.png)
 
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
+**Preprocessing**
+As a first step, I decided to convert the images to grayscale to reuduc the amount of data, the grayscale image will train the netwrok faster than color images. Grayscale images will not affect the performance as most of the traffic signs have red color. 
+Here is an example of a traffic sign image before and after grayscaling.
 
-The Project
----
-The goals / steps of this project are the following:
-* Load the data set
-* Explore, summarize and visualize the data set
-* Design, train and test a model architecture
-* Use the model to make predictions on new images
-* Analyze the softmax probabilities of the new images
-* Summarize the results with a written report
+![alt text][image2]
 
-### Dependencies
-This lab requires:
+As a last step, I normalized the image data to reduce skewness of images.
 
-* [CarND Term1 Starter Kit](https://github.com/udacity/CarND-Term1-Starter-Kit)
+![alt text][image2]
 
-The lab environment can be created with CarND Term1 Starter Kit. Click [here](https://github.com/udacity/CarND-Term1-Starter-Kit/blob/master/README.md) for the details.
 
-### Dataset and Repository
 
-1. Download the data set. The classroom has a link to the data set in the "Project Instructions" content. This is a pickled dataset in which we've already resized the images to 32x32. It contains a training, validation and test set.
-2. Clone the project, which contains the Ipython notebook and the writeup template.
-```sh
-git clone https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project
-cd CarND-Traffic-Sign-Classifier-Project
-jupyter notebook Traffic_Sign_Classifier.ipynb
-```
+**2.Model Description**
 
-### Requirements for Submission
-Follow the instructions in the `Traffic_Sign_Classifier.ipynb` notebook and write the project report using the writeup template as a guide, `writeup_template.md`. Submit the project code and writeup document.
+My final model consisted of the following layers:
 
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
+
+| Layer         		|     Description	        					| Input |Output| 
+|:---------------------:|:---------------------------------------------:| :----:|:-----:|
+| Input preprocessing   | 32x32x3 RGB image 	                           |**32x32x3**|32x32x1|
+| Convolution 5x5     	 | 1x1 stride, valid padding, RELU            	  |32x32x1|28x28x48|
+| Max pooling			        | 2x2 stride, 2x2 kernel						                  |28x28x48|14x14x48|
+| Convolution 5x5 	     | 1x1 stride, valid padding, RELU            	  |14x14x48|10x10x96|
+| Max pooling			        | 2x2 stride, 2x2 kernel	   					               |10x10x96|5x5x96|
+| Convolution 3x3 		    | 1x1 stride, valid padding, RELU               |5x5x96|3x3x172|
+| Max pooling			        | 1x1 stride, 2x2 kernel        				            |3x3x172|2x2x172|
+| Flatten				           | flatten the matrix to 1D   					              |2x2x172| 688|
+| FC                    | Fully connected layer                			      |688|84|
+| FC                    | output = traffic sign labels in data        	 |84|**43**|
+
+
+**Parameters**
+To train the model, I used an my local machine CPU.
+Training Parameters:
+Batch size : 128
+Epoch      : 15
+Optimizer  : Adamoptimizer
+Learning_rate: 0.001
+Sigma_layers: 0.1
+
+**Results**
+My final model results were:
+* training set accuracy of 95.5
+* validation set accuracy of 93.1 
+* test set accuracy of 92.8
+
+**Testing Model on New Images**
+
+Here are five German traffic signs that I found on the web:
+![alt text](img/new_one.png)
+
+Here are the results of the prediction:
+
+| Image			        |     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| Keep Rigth      		| Keep Right   									| 
+| Stop     			| Stop 										|
+| 30 km/h 					| 30 km/h											|
+| Priority road	      		| Priority road					 				|
+| cycle road			| General caution      							|
+
+
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 92.6.
+
+For the first image, the model is relatively sure that this is a keep rigth (probability of 1.0), and the image does contain a stop sign. The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| 1.00         			| Keep Right  									| 
+| 1.00     				| Stop 										|
+| 0.58					| 30Km/h											|
+| 0.98	      			| Priority Road					 				|
+| 0.83				    | General Caution     							|
 
