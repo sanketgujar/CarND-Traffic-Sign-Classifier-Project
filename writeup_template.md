@@ -24,7 +24,7 @@ The label distribution in training images can be visualized by the bargraph belo
 As a first step, I decided to convert the images to grayscale to reuduc the amount of data, the grayscale image will train the netwrok faster than color images. Grayscale images will not affect the performance as most of the traffic signs have red color. 
 Here is an example of a traffic sign image before and after grayscaling.As a last step, I normalized the image data to reduce skewness of images.
 
-![alt text](img/Figure_1.png)
+![alt text](img/Figure_2.png)
 
 
 
