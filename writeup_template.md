@@ -1,105 +1,78 @@
-***Traffic Sign Recognition***
+**Traffic Sign Recognition** 
+**Traffic Sign Recognition Project**
 
 
----
+Here is a link to my [project code](https://github.com/sanketgujar/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
 
-**Build a Traffic Sign Recognition Project**
+**Data Set Summary & Exploration**
+I used numpy, matplotlib and pandas to explore the dataset.
+* The size of training set is 34799
+* The size of the validation set is 4410
+* The size of test set is 12630
+* The shape of a traffic sign image is (32, 32, 3)
+* The number of unique classes/labels in the data set is 43
+
+**2. Here is an exploratory visualization of the data set.**
+The training images in the dataset can be seen as below
+![alt text](img/data_test_images.png)
+
+The label distribution in training images can be visualized by the bargraph below
+![alt text](img/bargraph.png)
 
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb)
-
-###Data Set Summary & Exploration
-
-####1. Provide a basic summary of the data set. In the code, the analysis should be done using python, numpy and/or pandas methods rather than hardcoding results manually.
-
-I used the pandas library to calculate summary statistics of the traffic
-signs data set:
-
-* The size of training set is ?
-* The size of the validation set is ?
-* The size of test set is ?
-* The shape of a traffic sign image is ?
-* The number of unique classes/labels in the data set is ?
-
-####2. Include an exploratory visualization of the dataset.
-
-Here is an exploratory visualization of the data set. It is a bar chart showing how the data ...
-
-![alt text][image1]
-
-###Design and Test a Model Architecture
-
-####1. Describe how you preprocessed the image data. What techniques were chosen and why did you choose these techniques? Consider including images showing the output of each preprocessing technique. Pre-processing refers to techniques such as converting to grayscale, normalization, etc. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, and provide example images of the additional data. Then describe the characteristics of the augmented training set like number of images in the set, number of images for each class, etc.)
-
-As a first step, I decided to convert the images to grayscale because ...
-
+**Preprocessing**
+As a first step, I decided to convert the images to grayscale to reuduc the amount of data, the grayscale image will train the netwrok faster than color images. Grayscale images will not affect the performance as most of the traffic signs have red color. 
 Here is an example of a traffic sign image before and after grayscaling.
 
 ![alt text][image2]
 
-As a last step, I normalized the image data because ...
+As a last step, I normalized the image data to reduce skewness of images.
 
-I decided to generate additional data because ... 
-
-To add more data to the the data set, I used the following techniques because ... 
-
-Here is an example of an original image and an augmented image:
-
-![alt text][image3]
-
-The difference between the original data set and the augmented data set is the following ... 
+![alt text][image2]
 
 
-####2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
+
+**2.Model Description**
 
 My final model consisted of the following layers:
 
-| Layer         		|     Description	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| Input         		| 32x32x3 RGB image   							| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 32x32x64 	|
-| RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x64 				|
-| Convolution 3x3	    | etc.      									|
-| Fully connected		| etc.        									|
-| Softmax				| etc.        									|
-|						|												|
-|						|												|
- 
+
+| Layer         		|     Description	        					| Input |Output| 
+|:---------------------:|:---------------------------------------------:| :----:|:-----:|
+| Input preprocessing   | 32x32x3 RGB image 	                           |**32x32x3**|32x32x1|
+| Convolution 5x5     	 | 1x1 stride, valid padding, RELU            	  |32x32x1|28x28x48|
+| Max pooling			        | 2x2 stride, 2x2 kernel						                  |28x28x48|14x14x48|
+| Convolution 5x5 	     | 1x1 stride, valid padding, RELU            	  |14x14x48|10x10x96|
+| Max pooling			        | 2x2 stride, 2x2 kernel	   					               |10x10x96|5x5x96|
+| Convolution 3x3 		    | 1x1 stride, valid padding, RELU               |5x5x96|3x3x172|
+| Max pooling			        | 1x1 stride, 2x2 kernel        				            |3x3x172|2x2x172|
+| Flatten				           | flatten the matrix to 1D   					              |2x2x172| 688|
+| FC                    | Fully connected layer                			      |688|84|
+| FC                    | output = traffic sign labels in data        	 |84|**43**|
 
 
-####3. Describe how you trained your model. The discussion can include the type of optimizer, the batch size, number of epochs and any hyperparameters such as learning rate.
+**Parameters**
+To train the model, I used an my local machine CPU.
+Training Parameters:
+Batch size : 128
+Epoch      : 15
+Optimizer  : Adamoptimizer
+Learning_rate: 0.001
+Sigma_layers: 0.1
 
-To train the model, I used an ....
-
-####4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
-
+**Results**
 My final model results were:
-* training set accuracy of ?
-* validation set accuracy of ? 
-* test set accuracy of ?
+* training set accuracy of 99.0
+* validation set accuracy of 93.2 
+* test set accuracy of 92.4
 
-If an iterative approach was chosen:
-* What was the first architecture that was tried and why was it chosen?
-* What were some problems with the initial architecture?
-* How was the architecture adjusted and why was it adjusted? Typical adjustments could include choosing a different model architecture, adding or taking away layers (pooling, dropout, convolution, etc), using an activation function or changing the activation function. One common justification for adjusting an architecture would be due to overfitting or underfitting. A high accuracy on the training set but low accuracy on the validation set indicates over fitting; a low accuracy on both sets indicates under fitting.
-* Which parameters were tuned? How were they adjusted and why?
-* What are some of the important design choices and why were they chosen? For example, why might a convolution layer work well with this problem? How might a dropout layer help with creating a successful model?
 
-If a well known architecture was chosen:
-* What architecture was chosen?
-* Why did you believe it would be relevant to the traffic sign application?
-* How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- 
 
-###Test a Model on New Images
+I started with implementing Lenet first which gave me a validation test score of 89%, to improve the accuracy I added more convlutional layers and converted images to gray and normalized them, which gave me better result from the earlier model. Training for 15 epochs kept the accuracy fluctuating between (92 to 96), to prevent this we can add a filter which stops the training when the validation score begins to drop to avoid overfitting. I trained the network for 30 epochs but the maximum accuracy I got was 96.3%, but the training requires lot of time.  
 
-####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
-
+**Testing Model on New Images**
 Here are five German traffic signs that I found on the web:
-
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text](img/new_one.png)
 
 Here are the results of the prediction:
 
@@ -113,7 +86,6 @@ Here are the results of the prediction:
 
 
 The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of 92.6.
-th cell of the Ipython notebook.
 
 For the first image, the model is relatively sure that this is a keep rigth (probability of 1.0), and the image does contain a stop sign. The top five soft max probabilities were
 
@@ -124,4 +96,3 @@ For the first image, the model is relatively sure that this is a keep rigth (pro
 | 0.58					| 30Km/h											|
 | 0.98	      			| Priority Road					 				|
 | 0.83				    | General Caution     							|
-
