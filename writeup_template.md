@@ -53,11 +53,17 @@ My final model consisted of the following layers:
 
 **Parameters**
 To train the model, I used an my local machine CPU.
+
 Training Parameters:
+
 Batch size : 128
+
 Epoch      : 15
+
 Optimizer  : Adamoptimizer
+
 Learning_rate: 0.001
+
 Sigma_layers: 0.1
 
 **Results**
